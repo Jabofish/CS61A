@@ -1,0 +1,335 @@
+\documentclass{ctexart}
+\usepackage{amsmath, amsthm, amssymb, graphicx, url, pythonhighlight, geometry}
+\usepackage[bookmarks=true, colorlinks, citecolor=blue, linkcolor=black]{hyperref}
+
+% 以上为包调用
+
+\title{{\Huge{\textbf{CS61A}}}\\——一点学习笔记}
+\author{Jabofish}
+\date{\today}
+\linespread{1.5}
+
+% 对封面的控制
+
+\geometry{
+ a4paper,
+ total={170mm,257mm},
+ left=20mm,
+ top=20mm,
+ }
+
+\begin{document}
+
+\maketitle
+\thispagestyle{empty}
+\newpage
+
+% 封面的输出
+
+\pagenumbering{roman}
+\setcounter{page}{0}
+\begin{center}
+    \Huge\textbf{Preface}
+\end{center}~\ % 前言的具体内容
+During the winter vacation of my freshman year,
+I participated in the study of this course 
+and planned to make some records through this document.\\
+It is based on resourses from https://inst.eecs.berkeley.edu/\url{~}cs61a/fa20/
+~\\repository:https://github.com/Jabofish/CS61A/
+\begin{flushright}
+    \begin{tabular}{c}
+        Jabofish
+    \end{tabular}
+\end{flushright}
+\begin{center}
+    \Huge\textbf{前言}
+\end{center}~\ % 前言的具体内容
+在大一寒假期间，我开始学习这门课程，并用这篇文档来做记录。\\
+资料来源于https://inst.eecs.berkeley.edu/\url{~}cs61a/fa20/
+~\\\\仓库：https://github.com/Jabofish/CS61A/
+\begin{flushright}
+    \begin{tabular}{c}
+        Jabofish\\
+        \today
+    \end{tabular}
+\end{flushright}
+
+\newpage
+
+% 前言的输出
+
+\tableofcontents
+\newpage
+
+% 目录的输出
+% 以下为正文
+
+\setcounter{page}{1}
+\pagenumbering{arabic}
+% 页面格式控制
+
+% 五个层级section subsection subsubsection paragraph subparagraph
+
+\section{Week-1}
+
+\subsection{Computer Science}
+
+Computer Science is the study of 
+what problems can be solved using computation,
+how to solve those problems, and
+what techniques lead to effective solutions.
+
+\subsubsection{Lab 00}
+课程作业的提交涉及到Git的安装与使用，需要给电脑安装Git，并掌握基本的git命令。
+
+使用方法：\\1.打开Git Bash\\2.使用命令行语句进入指定目录\\
+3.使用python来打开文件，自动完成代码检测
+
+涉及的命令行语句：
+\begin{python}
+    ls 列出当前目录中的所有文件
+    cd <path to directory> 切换到指定的目录中(cd .. 表示回退)
+    mkdir <directory name> 用给定的名字建立一个新的目录
+    mv <source path> <destination path> 将指定来源的文件移动到指定的目的地
+    python ok -q python-basics -u --local 运行测试
+    python ok --local 代码测试
+\end{python}
+
+\subsection{Functions}
+
+\subsubsection{Lecture}
+
+表达式的分析顺序：先看操作符（或对应的函数），再看操作数（也可以是一个基元表达式）。
+赋值语句的执行顺序：1.等号右侧从左到右计算。2.将右侧的结果赋值到左侧。
+
+\begin{python}
+    a = 1
+    b = 2
+    b,a = a+b,b
+    print(a,b)
+\end{python}
+以上代码将会输出2 3
+
+赋值和函数定义都是一种抽象方式，后者更为强大。找声明时优先在本地框架找，找不到再去全局框架找。
+
+\subsubsection{Hw 01}
+
+需了解operator库里的常见函数：
+加法 a + b add(a, b)  减法 a - b sub(a, b)，
+并初步理解函数的抽象性；
+了解min和max的运用
+
+关于git的上传的重要补充：
+
+基本流程：工作区-add-暂存区-commit-本地仓库区-push-远程仓库区
+
+\begin{python}
+#克隆
+git clone http://xxx
+
+#拉取
+git pull http://xxx
+
+#添加
+git add xxx
+
+#描述信息
+git commit -m "注释"
+
+#推送到远程
+git push origin master
+
+git push
+\end{python}
+如果开了代理还是提交失败，可能是git未使用代理，需设置代理：
+
+git config --global http.proxy 127.0.0.1:7890（从系统设置查看IP和端口）
+\\在vsc中提供了git的可视化操作，极大降低了对命令行的要求，可以考虑使用。
+\section{Week-2}
+
+\subsection{Control}
+
+\subsubsection{Lecture}
+
+Python中每个函数都有返回值，当没有明确返回值时将会返回默认的None（None表示空，是隐性的）。
+纯函数只有返回值，非纯函数会产生别的效果（如打印值，即display value）。
+\begin{python}
+    print(print(1))
+    result is:
+    1
+    None
+\end{python}
+一个程序会有多个框架，包括全局框架和局部框架（如函数体内部），相同的变量名在不同的框架内可能拥有不同的含义。
+可以根据子框架追溯到父框架，变量和函数优先在子框架中找到定义，找不到再去父框架找。
+
+运算符可以看作是运算函数的简记符。truediv:/   floor://   mod:\%
+
+一个函数可以有多个返回值，用逗号隔开的返回值会按顺序返回。
+doctest可以通过文档内的提示语句来实现对代码的运行过程和结果进行测试，检验是否符合预期。
+\\doctest的调用：python -m doctest -v example.py
+\\doctest 的写法：在函数的注释中写入：> >  > 函数（值），回车写入预期结果。
+条件语句的基本写法：
+\begin{python}
+    if exp:
+        clause
+    elif exp:
+        clause
+    else:
+        claude
+\end{python}
+
+while语句：
+\begin{python}
+    i, total= 0, 0
+    while i < 3:
+        i = i + 1
+        total = total + i
+\end{python}
+
+例子，质因数分解：
+\begin{python}
+    def prime_factors(n):
+    while n > 1:
+        k = smallest_prime_factor(n)
+        n = n // k
+        print(k)
+def smallest_prime_factor(n):
+    k = 2
+    while n % k != 0:
+        k =k + 1
+    return k
+prime_factors(858) # case
+\end{python}
+这个例子的绝妙之处在于，通过循环实现了类似于递归的效果。
+可以先把一个大功能划分成若干个小功能，再逐一实现。 
+\subsubsection{Lab 01} 
+要学会使用把数字转成字符串，然后用for遍历每个数字的办法。
+\subsection{Higher-order Functions}
+以斐波那契数列为例：
+\begin{python}
+    def fib(n): 
+ """Compute the nth Fibonacci number, for N >= 1."""
+ pred, curr = 0, 1 # 0th and 1st Fibonacci numbers
+ k = 1 # curr is the kth Fibonacci number
+ while k < n: 
+ pred, curr = curr, pred + curr 
+ k = k + 1
+ return curr
+\end{python}
+
+assert语句的运用：
+
+\begin{python}
+    assert exp,'Hint'
+    #Do nothing if exp is True
+    #Return an ERROR and 'Hint' if exp is False
+\end{python}
+
+对函数划分的精妙运用：
+
+\begin{python}
+    def area(r, shape_constant):
+    """Return the area of a shape from length measurement R."""
+    assert r > 0, 'A length must be positive'
+    return r * r * shape_constant
+
+def area_square(r):
+    return area(r, 1)
+
+def area_circle(r):
+    return area(r, pi)
+
+def area_hexagon(r):
+    return area(r, 3 * sqrt(3) / 2)
+
+# Functions as arguments
+\end{python}
+从上面的例子可以学到：把相同点抽象出来作为一个函数框架，然后在具体函数中调用并补全这个框架。
+在函数框架中使用另一个函数名或一个常数作为参数，可以实现不同的运算法则。
+\begin{python}
+    def make_adder(n):
+        def adder(k):
+            return k + n
+        return adder 
+'''
+在上例中，n作为形式参数在adder的定义中起了作用。
+当n=2时，返回的adder函数中所定义的return语句是：return k + 2。
+所以make_adder(1)(2)的值为3，
+此时make_adder(1)(2)等效于adder(2)，
+且这里的adder返回语句为：return k + 1。
+'''
+\end{python}
+函数可以作为参数，把函数入口作为返回值，可以在全局框架中被调用。这就是高阶函数的应用。
+
+lambda表达式：（匿名函数的使用）
+\\1.square = lambda x: x * x（参数:表达式）
+\\2.(lambda x: x * x)(4)（可直接调用）
+\begin{python}
+    def search(f):
+        x = 0
+        while not f(x):
+            x += 1
+#一个简单的通过返回值来决定结束的遍历函数（学会对返回值的运用）
+    def inverse(f):
+        return lambda y: search(lambda x: f(x) == y)
+#用非常简单的代码实现了整数范围内的反函数的值的寻找
+    sqrt = inverse(square)
+\end{python}
+
+自带函数的控制语句具有调用表达式无法实现的作用，因为调用表达式总是先计算表达式的值。
+
+在逻辑判断中会有“短路”现象（这也是一种控制），以避免不必要的运算，类似于c语言。因此需掌握and，or，not的用法。
+\\A and B:两者都正确，返回 and 后面的值;两者有一个错误，返回最先错误的。
+\\A or B:返回其中布尔值为 True 的一方;若无，返回 or 后面的值。
+
+也就是说：在哪里停下就返回哪里的结果。
+
+\begin{python}
+    <consequent> if <predicate> else <alternative>
+    #条件表达式，如果if后为真，执行前面的语句，否则执行else后的语句，例子如下
+    1/x if x!=0 else 0
+\end{python}
+\subsubsection{Hog}
+这是一个很有意思的项目，做成后很有成就感，不过中间遇到了很多的问题。
+\\1.在problem6中写错了函数的位置，但是意外通过了测试点，
+导致后面在写problem7的时候始终没找到bug，要十分小心。
+(后来发现其实是测试文件还没解锁，自己没仔细看以为是通过了，难绷)
+\\2.problem7中以高阶函数的形式修改了原函数参数的默认值，非常巧妙。
+\\3.高阶函数使用时给参数赋值的顺序也很有讲究，会影响逻辑结构。
+\subsection{Environments}
+高阶函数的特点：以函数作为参数，或返回函数，后者用到嵌套定义。（子框架中用到的未定义参数会到父框架中找值）
+
+在已有一个函数的情况下，仅用该函数作为参数来定义函数，
+使用多层嵌套来返回被定义的函数时可以实现一个效果：
+新定义的函数可以通过多次赋值来逐层解开嵌套。如定义一个以f0为参数的f1，然后在f1中定义f2，f2中定义f3，
+并且f3返回占位赋值后的f0的结果（事实上还未赋值，只是用参数先占住了位置），f2返回f3，f1返回f2，
+并用fun1来存储最后这个返回值。先调用fun，
+将f0代入，接下来，调用fun1，代入的参数会补全f2的空缺部分，
+然后返回f3（此时的f3和前面的f3已有不同），并用fun储存这个返回值。继续调用fun，代入的参数将同前面的参数一起补全f0所需的参数，
+完成f0的完全调用，并返回f0的结果。
+
+\begin{python}
+fun = lambda f0: lambda x: lambda y: f0(x,y)   
+\end{python}
+
+\section{Week-3}
+
+\subsection{Design}
+
+函数命名最好能反映其效果、行为、返回值，见名知义。
+给重复使用的表达式或过程进行命名。
+
+\subsection{Function Examples}
+
+ 一些实例，用于应付考试。通过代入特定的值来理顺程序的执行内容/
+ 
+\section{Week-4}
+
+\subsection{recursion}
+
+递归函数：直接或间接地调用自己的函数。
+通常从判断基本情况开始，基本情况的判断是不需要递归的；
+更复杂的情况则会通过调用自己来一步步地化简到基本情况。
+递归更像是数学归纳法的实际应用。
+
+\end{document}

@@ -312,8 +312,12 @@ lambda表达式：（匿名函数的使用）
 它产生一系列连锁函数，其中每个函数固定部分参数，并返回一个新函数，用于传回其它剩余参数的功能。
 
 \begin{python}
-fun = lambda f0: lambda x: lambda y: f0(x,y)   
+    fun = lambda f0: lambda x: lambda y: f0(x,y)   
 \end{python}
+
+\subsubsection{Lab 02}
+
+简单的高阶函数运用。
 
 \section{Week-3}
 
@@ -396,6 +400,28 @@ def move_stack(n, start, end):
         move_stack(n-1, start, spare_peg)
         print_move(start, end)
         move_stack(n-1, spare_peg, end)
+\end{python}
+
+\subsubsection{HW 02}
+
+递归函数也可以越递归参数越大，只需要写一个高阶函数再调用，
+就可以实现和while语句相近的效果。
+
+在没有函数名的情况下也可以通过lambda语句实施递归操作，
+但是需要将函数自身作为参数传递到每一次的调用之中。
+\begin{python}
+    from operator import sub, mul
+    def make_anonymous_factorial():
+    """Return the value of an expression that computes factorial.
+
+    >>> make_anonymous_factorial()(5)
+    120
+    >>> from construct_check import check
+    >>> # ban any assignments or recursion
+    >>> check(HW_SOURCE_FILE, 'make_anonymous_factorial', ['Assign', 'AugAssign', 'FunctionDef', 'Recursion'])
+    True
+    """
+    return (lambda f:lambda n:f(f,n))(lambda f,n: 1 if n == 1 else mul(n, f(f,sub(n, 1))))
 \end{python}
 
 \end{document}

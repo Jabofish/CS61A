@@ -308,6 +308,9 @@ lambda表达式：（匿名函数的使用）
 然后返回f3（此时的f3和前面的f3已有不同），并用fun储存这个返回值。继续调用fun，代入的参数将同前面的参数一起补全f0所需的参数，
 完成f0的完全调用，并返回f0的结果。
 
+这是currying的应用。柯里化（Currying）是一种处理多元函数的方法。
+它产生一系列连锁函数，其中每个函数固定部分参数，并返回一个新函数，用于传回其它剩余参数的功能。
+
 \begin{python}
 fun = lambda f0: lambda x: lambda y: f0(x,y)   
 \end{python}
@@ -325,11 +328,74 @@ fun = lambda f0: lambda x: lambda y: f0(x,y)
  
 \section{Week-4}
 
-\subsection{recursion}
+\subsection{Recursion}
 
 递归函数：直接或间接地调用自己的函数。
 通常从判断基本情况开始，基本情况的判断是不需要递归的；
 更复杂的情况则会通过调用自己来一步步地化简到基本情况。
-递归更像是数学归纳法的实际应用。
+基本情况可以不止一种。
+递归可以理解为数学归纳法的实际应用。
+因此可以用数学归纳法来设计和检验递归函数。
+当有奇偶数区分时可以设计两个递归函数分别调用对方。
+递归和迭代（循环）往往可以相互转化，但递归往往更简单。
+
+\subsection{Tree Recursion}
+
+\begin{python}
+    def factorial(n):
+        if n == 0:
+            return 1
+        else:
+            return n * factorial(n-1)
+\end{python}
+
+\begin{python}
+    def cascade(n):
+        print(n)
+        if n > 10:
+            cascade(n//10)
+            print(n)
+\end{python}
+
+树递归：递归函数体中有多次对自身的调用。
+如斐波那契数列：
+\begin{python}
+    def fib(n):
+        if n == 0:
+            return 0
+        else if n == 1:
+            return 1
+        else:
+            return fib(n-2) + fib(n-1)
+\end{python}
+步骤较多的递归可以通过记值来简化计算过程。
+
+使用递归可以写出汉诺塔每次移动的步骤。
+\begin{python}
+    def print_move(origin, destination):
+    """Print instructions to move a disk."""
+    print("Move the top disk from rod", origin, "to rod", destination)
+
+def move_stack(n, start, end):
+    """Print the moves required to move n disks on the start pole to the end
+    pole without violating the rules of Towers of Hanoi.
+
+    n -- number of disks
+    start -- a pole position, either 1, 2, or 3
+    end -- a pole position, either 1, 2, or 3
+
+    There are exactly three poles, and start and end must be different. Assume
+    that the start pole has at least n disks of increasing size, and the end
+    pole is either empty or has a top disk larger than the top n start disks.
+    """
+    assert 1 <= start <= 3 and 1 <= end <= 3 and start != end, "Bad start/end"
+    if n == 1:
+        print_move(start, end)
+    else:
+        spare_peg = 6 - start - end
+        move_stack(n-1, start, spare_peg)
+        print_move(start, end)
+        move_stack(n-1, spare_peg, end)
+\end{python}
 
 \end{document}

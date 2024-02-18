@@ -535,5 +535,60 @@ def is_leaf(tree):
 #判断是否是叶
 \end{python}
 
+\section{Week-6}
+
+\subsection{Binary Numbers}
+
+二进制数在计算机中存储比其他进制的稳定。负数以补码形式参与计算。补码的补码是原码。100的补码还是100，从而避免了-0的出现。
+
+布尔逻辑：and/or/not。通过串联和并联分别构建and和or。另开一条带电阻的通路可以构建not。
+
+\subsubsection{Lab 05}
+
+\begin{python}
+    return tree(label(t),[tree(leaf) for leaf in leaves])
+    #这个可以一次性给树（原来是叶子）加多片叶子
+    return [[num,fn(num)] for num in seq if fn(num)>=lower and fn(num)<=upper]
+    #筛选
+\end{python}
+
+\subsection{Circuits}
+
+设计电路：1.列真值表。2.为每个输出列的每一种情况写逻辑表达式（这个逻辑表达式必须保证只有一种输入才能得到该情况下的输出，即形成充分必要条件，只看输出为1的情况即可）。
+3.组合每列所有情况来得到适用整个列的表达式。4，画电路图。
+
+通过层层抽象来在简单结构的基础上构建更复杂的结构，但是简单抽象后的电路未必是资源优化最好的。
+
+加法器：需要处理加法与进位，三进二出。
+
+卡诺图化简法（Karnaugh maps）：用二维的方格图来简化逻辑（电路），尽量保证图表的坐标轴上相邻两个输入有一位及以上的相同位，可以更好地找到更有代表性地逻辑表达式。
+
+\subsubsection{HW 03}
+
+树与二叉树的转换，数据体的抽象化。
+
+\subsection{Mutable Values}
+
+对象：含有绑定在变量和函数的属性（数据和行为）。对象储存在类中。
+字符串的常用方法：upper/lower/swapcase
+\\ord()：输出ASCII码
+
+列表方法：append（追加一个元素）/extend（另一个列表的元素进入列表）/pop（移除并返回最后一个元素）/remove。
+加和或切分会在已有元素的基础上产生新列表，里面的嵌套列表依旧指向原对象。
+list()：也在已有基础上产生新列表，但是属于一个新的对象。
+
+元组（tuples）：()，不可更改，可以作为字典的键。可以更改元组中的可变容器，如列表。
+
+is：可以用于判断两个变量是否指向同一个对象。
+
+\begin{python}
+    t=[1,2,3]
+    t[1:3]=[t]
+    t.extend(t)
+    #t=[1,[...],1,[...]]
+    t=[[1,2],[3,4]]
+    t[0].append(t[1:2])
+    #t=[[1,2,[[3,4]]],[3,4]]
+\end{python}
 
 \end{document}

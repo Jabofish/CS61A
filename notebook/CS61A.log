@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999995 (TeX Live 2023) (preloaded format=xelatex 2023.11.6)  14 FEB 2024 23:50
+This is XeTeX, Version 3.141592653-2.6-0.999995 (TeX Live 2023) (preloaded format=xelatex 2023.11.6)  19 FEB 2024 03:15
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -648,20 +648,20 @@ LaTeX Font Info:    Font shape `TU/lmtt/bx/n' in size <7.52812> not available
 LaTeX Font Warning: Font shape `TU/FangSong(0)/m/sl' undefined
 (Font)              using `TU/FangSong(0)/m/n' instead on input line 127.
 
-[1] [2] [3] [4] [5] [6] [7] [8] [9] (./CS61A.aux)
+[1] [2] [3] [4] [5] [6] [7] [8] [9] [10] (./CS61A.aux)
 
 LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 
 Package rerunfilecheck Info: File `CS61A.out' has not changed.
-(rerunfilecheck)             Checksum: 0FA9B2BA728AAD86C6116D9C7D2F9BFD;2760.
+(rerunfilecheck)             Checksum: 91DA1BF1A351369C465ACF55D6EBB7C1;3391.
  ) 
 Here is how much of TeX's memory you used:
- 18690 strings out of 476683
- 397404 string characters out of 5807575
+ 18723 strings out of 476683
+ 398247 string characters out of 5807575
  2106012 words of memory out of 5000000
- 38653 multiletter control sequences out of 15000+600000
+ 38686 multiletter control sequences out of 15000+600000
  522101 words of font info for 106 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
  89i,6n,97p,512b,1947s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
-Output written on CS61A.pdf (12 pages).
+Output written on CS61A.pdf (13 pages).

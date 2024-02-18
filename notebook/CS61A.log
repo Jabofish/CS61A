@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999995 (TeX Live 2023) (preloaded format=xelatex 2023.11.6)  19 FEB 2024 03:15
+This is XeTeX, Version 3.141592653-2.6-0.999995 (TeX Live 2023) (preloaded format=xelatex 2023.11.6)  19 FEB 2024 03:21
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -642,18 +642,18 @@ LaTeX Font Info:    Font shape `TU/SimSun(0)/m/sl' in size <10.53937> not availa
 File: lstlang1.sty 2023/02/27 1.9 listings language file
 )
 LaTeX Font Info:    Font shape `TU/lmtt/bx/n' in size <7.52812> not available
-(Font)              Font shape `TU/lmtt/b/n' tried instead on input line 109.
+(Font)              Font shape `TU/lmtt/b/n' tried instead on input line 107.
 
 
 LaTeX Font Warning: Font shape `TU/FangSong(0)/m/sl' undefined
-(Font)              using `TU/FangSong(0)/m/n' instead on input line 127.
+(Font)              using `TU/FangSong(0)/m/n' instead on input line 125.
 
 [1] [2] [3] [4] [5] [6] [7] [8] [9] [10] (./CS61A.aux)
 
 LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 
 Package rerunfilecheck Info: File `CS61A.out' has not changed.
-(rerunfilecheck)             Checksum: 91DA1BF1A351369C465ACF55D6EBB7C1;3391.
+(rerunfilecheck)             Checksum: E44D237E0B8D11B3248FA02395152EDC;3185.
  ) 
 Here is how much of TeX's memory you used:
  18723 strings out of 476683
